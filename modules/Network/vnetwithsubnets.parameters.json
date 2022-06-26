@@ -1,0 +1,38 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "virtualNetworkValues": {
+            "value": {
+                "name": "my-vnet",
+                "addressPrefix": "10.10.10.0/24",
+                "subnets": {
+                    "privateendpoints-snet": {
+                        "addressSpace": "10.10.10.0/27",
+                        "privateEndpointPolicies": "Disabled",
+                        "privateLinkServicePolicies": "Enabled",
+                        "delegations": {},
+                        "serviceEndpoints": true
+                    },
+                    "appservice-snet": {
+                        "addressSpace": "10.10.10.32/27",
+                        "privateEndpointPolicies": "Enabled",
+                        "privateLinkServicePolicies": "Enabled",
+                        "delegations": {
+                            "name": "AppServicePlan",
+                            "serviceName": "Microsoft.Web/serverFarms"
+                        },
+                        "serviceEndpoints": false
+                    },
+                    "apim-snet": {
+                        "addressSpace": "10.10.10.64/27",
+                        "privateEndpointPolicies": "Enabled",
+                        "privateLinkServicePolicies": "Enabled",
+                        "delegations": {},
+                        "serviceEndpoints": false
+                    }
+                }
+            }
+        }
+    }
+}

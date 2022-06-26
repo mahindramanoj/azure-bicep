@@ -1,0 +1,70 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "keyVaultName": {
+            "value": "mahiss-kv"
+        },
+        "tenantId": {
+            "value": "f6d5b8fa-99ce-4d79-b064-fd17d82f3568"
+        },
+        "appServicePlanValues": {
+            "value": {
+                "name": "mahis-asp",
+                "sku": {
+                    "name": "Y1",
+                    "tier": "Dynamic"
+                },
+                "kind": "windows",
+                "maximumElasticWorkercount": 3
+            }
+        },
+        "webAppValues": {
+            "value": {
+                "name": "mahiswapp",
+                "kind": "functionapp",
+                "enableManagedIdentity": true,
+                "vnetIntegration": {
+                    "vnetName": "my-vnet",
+                    "vnetRG": "",
+                    "subnet": "appservice-snet"
+                },
+                "privateEndpoint": {
+                    "subnet": "privatendpoints-snet",
+                    "subResource": "sites"
+                },
+                "privateDnsZone": {
+                    "name": "privatelink.azurewebsites.net"
+                },
+                "appSettings": []
+            }
+        },
+        "apimValues": {
+            "value": {
+                "name": "mahis-apim",
+                "sku": {
+                    "name": "Developer",
+                    "capacity": 1 
+                },
+                "enableManagedIdentity": true,
+                "publisherName": "manoj12327@gmail.com",
+                "publisherEmail": "Mahis",
+                "vnetType": "External",
+                "vnetName": "my-vnet",
+                "vnetRG": "",
+                "subnetName": "apim-snet",
+                "appInsights": {
+                    "namePrefix": "mahis-api",                      
+                    "kind": "website",                      
+                    "applicationType": "website",
+                    "newWorkspace": true,
+                    "workspaceRG": "",
+                    "workspace": {
+                        "name": "mahis-lwspace",
+                        "sku": "PerGB2018"
+                    }
+                }
+            }
+        }
+    }
+}

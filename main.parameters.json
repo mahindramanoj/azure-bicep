@@ -1,0 +1,74 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "resourceGroupBlock": {
+            "value": {
+                "name": "myRG",
+                "location": "canadacentral",
+                "tags": {}
+            }
+        },
+        "virtualNetworkName": {
+            "value": "myVnet"
+        },
+        "virtualNetworkAddressPrefix": {
+            "value": "10.10.0.0/16"
+        },
+        "subnetBlock": {
+            "value": {
+                "subnet1": {
+                    "addressSpace": "10.10.10.0/25",
+                    "privateEndpointPolicies": "Enabled",
+                    "privateLinkServicePolicies": "Enabled",
+                    "delegations": {
+                        "name": "AppServicePlan",
+                        "serviceName": "Microsoft.Web/serverFarms"
+                    },
+                    "serviceEndpoints": true
+                },
+                "subnet2": {
+                    "addressSpace": "10.10.10.128/25",
+                    "privateEndpointPolicies": "Enabled",
+                    "privateLinkServicePolicies": "Enabled",
+                    "delegations": {},
+                    "serviceEndpoints": false
+                }
+            }
+        },
+        "vmAvailabilitySetName": {
+            "value": ""
+        },
+        "vmSize": {
+            "value": "Standard_B2ms"
+        },
+        "vmAdminPassword": {
+            "value": "Password#123"
+        },
+        "vmValues": {
+            "value": {
+                "vmNamePrefix": "my-az",
+                "vmVnetRg": "myRG",
+                "vmVnetName": "myVnet",
+                "primaryVnicSubnetName": "subnet2",
+                "secondaryVnicSubnetName": "",
+                "enablevNicAcceleratedNetworking": false,
+                "enableManagedIdentity": false,
+                "vmCount": 1,
+                "osDiskType": "Standard_LRS",
+                "osDiskSizeGB": 128,
+                "dataDiskType": "",
+                "dataDiskSizeGB": "",
+                "dataDiskCount": 0,
+                "applyAzureHybridBenefit": false,
+                "bootDiagnostics": {
+                    "enabled": true,
+                    "storageAccountName": "mahisbootdiagst",
+                    "newstorageAccount": true,
+                    "storageAccountRG": ""
+                },
+                "customScriptExtension": {}
+            }
+        }
+    }
+}
